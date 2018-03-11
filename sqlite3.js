@@ -31,10 +31,22 @@ let createDb = () => {
 
 createDb();
 
-let showEmployees = () => {
+let getEmployees = () => {
     employeeArr.forEach((obj)=> {
         console.log('employee', `ID: ${obj.id} First Name: ${obj.firstName} Last Name: ${obj.lastName} Job Title: ${obj.jobTitle} Address: ${obj.address}`);
         
     })
 }
-showEmployees();
+getEmployees();
+
+let getJobTitle = () => {
+    console.log('Job Titles:'  );
+    
+    employeeArr.forEach((obj)=>{
+        console.log(`Employee Name: ${obj.firstName}`);
+        console.log(`Job Title: ${obj.jobTitle}`);
+        
+    })
+}
+
+getJobTitle();
