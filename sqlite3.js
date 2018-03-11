@@ -23,9 +23,18 @@ let createDb = () => {
 
 
     employeeArr.forEach((element) => {
-        db.run(`INSERT INTO employees VALUES (null, '${element.firstName}', '${element.lastName}', '${element.jobTitle}', '${element.address}')`)
+        db.run(`INSERT INTO employees VALUES ('${element.id}', '${element.firstName}', '${element.lastName}', '${element.jobTitle}', '${element.address}')`)
+        
+        
     });
 };
 
 createDb();
 
+let showEmployees = () => {
+    employeeArr.forEach((obj)=> {
+        console.log('employee', `ID: ${obj.id} First Name: ${obj.firstName} Last Name: ${obj.lastName} Job Title: ${obj.jobTitle} Address: ${obj.address}`);
+        
+    })
+}
+showEmployees();
