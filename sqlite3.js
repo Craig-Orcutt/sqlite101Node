@@ -49,17 +49,31 @@ getEmployees();
 
 let getJobTitle = () => {
     return new Promise ( (resolve, reject) => {
-        db.all(`SELECT title
+        db.all(`SELECT first as 'First Name', title as 'Job Title' 
                 FROM employees`,
             (err,data)=>{
                 if(err){
                     return console.log('darn', err.toString);
                 }
-                console.log('Job Title', data);
+                console.log(data);
+                resolve(data);
+            });
+    });
+}
+getJobTitle();
+
+let getSpecific = () => {
+    return new Promise ( (resolve, reject) =>{
+        db.all(`SELECT first as 'First Name: ', last as 'Last Name: ', address as 'Address: '
+                FROM employees`,
+            (err,data)=>{
+                if(err){
+                    return console.log('dagnabbit', err.toString);
+                }
+                console.log(data);
                 resolve(data);
             });
     });
 }
 
-getJobTitle();
-
+getSpecific();
