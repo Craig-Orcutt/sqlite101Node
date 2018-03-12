@@ -1,3 +1,4 @@
+
 const { Database } = require('sqlite3').verbose();
 const db = new Database('employees.sqlite', () => {
     console.log('Connected to DB');
@@ -32,21 +33,33 @@ let createDb = () => {
 createDb();
 
 let getEmployees = () => {
-    employeeArr.forEach((obj)=> {
-        console.log('employee', `ID: ${obj.id} First Name: ${obj.firstName} Last Name: ${obj.lastName} Job Title: ${obj.jobTitle} Address: ${obj.address}`);
-        
+    return new Promise( (resolve, reject) =>{
+        db.all( `SELECT *
+                FROM employees`,
+            (err,data)=>{
+                if(err){
+                    return console.log('whoops', err.toString);
+                }
+                console.log(data);
+                resolve(data)
+            })
     })
-}
+    }
 getEmployees();
 
 let getJobTitle = () => {
-    console.log('Job Titles:'  );
-    
-    employeeArr.forEach((obj)=>{
-        console.log(`Employee Name: ${obj.firstName}`);
-        console.log(`Job Title: ${obj.jobTitle}`);
-        
-    })
+    return new Promise ( (resolve, reject) => {
+        db.all(`SELECT title
+                FROM employees`,
+            (err,data)=>{
+                if(err){
+                    return console.log('darn', err.toString);
+                }
+                console.log('Job Title', data);
+                resolve(data);
+            });
+    });
 }
 
 getJobTitle();
+
